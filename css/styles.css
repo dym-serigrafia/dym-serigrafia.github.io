@@ -333,7 +333,13 @@ button { font: inherit; cursor: pointer; }
 /* ---------- 12. FOOTER ---------- */
 .footer { background: var(--ink); color: var(--white); padding: 64px 0 28px; }
 .footer__inner { display: grid; gap: 40px; }
-.footer__brand img { width: 150px; }
+/* El aro del logo es gris tinta: sobre el fondo oscuro se perdía,
+   así que va sobre una placa blanca (como una etiqueta impresa) */
+.footer__brand img {
+  width: 172px; padding: 14px;
+  background: var(--white); border-radius: var(--radius);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .25);
+}
 .footer__ship { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-weight: 700; }
 .footer__ship .icon, .footer__contact .icon { color: var(--orange); }
 .footer__contact a {
