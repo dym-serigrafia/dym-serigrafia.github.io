@@ -51,6 +51,7 @@ body {
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
 h1, h2, h3, p { margin: 0; }
+p, li { text-wrap: pretty; } /* evita una palabra sola en la última línea */
 ul, ol { margin: 0; padding: 0; list-style: none; }
 button { font: inherit; cursor: pointer; }
 :focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; border-radius: 4px; }
@@ -229,9 +230,14 @@ button { font: inherit; cursor: pointer; }
 .product {
   display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
   background: var(--white); border-radius: var(--radius); overflow: hidden;
-  border-top: 6px solid var(--blue);
 }
-.product--orange { border-top-color: var(--orange); }
+/* Acento de color: trazo de tinta sobre el título (antes era un borde
+   superior que chocaba con las esquinas redondeadas) */
+.product__body::before {
+  content: ""; width: 48px; height: 6px; border-radius: 3px;
+  background: var(--blue);
+}
+.product--orange .product__body::before { background: var(--orange); }
 .product__img { width: 100%; height: 100%; min-height: 220px; object-fit: contain; padding: 8%; background: var(--mesh); filter: drop-shadow(0 10px 12px rgba(26, 34, 48, .16)); }
 .product__body { padding: 24px 20px; display: flex; flex-direction: column; gap: 12px; }
 .product__body p { color: var(--ink-soft); }
@@ -456,7 +462,7 @@ button { font: inherit; cursor: pointer; }
 .loader__stencil, .loader__print {
   position: absolute; left: 12%; top: 12%; width: 76%; height: 76%; object-fit: contain;
 }
-.loader__stencil { opacity: .1; filter: grayscale(1); }
+.loader__stencil { opacity: .22; filter: grayscale(1); }
 .loader__print { clip-path: inset(0 0 100% 0); animation: print-reveal var(--load-time) linear forwards; }
 
 /* Rasqueta: el contenedor tiene alto 0; su "top" es la línea de contacto */
