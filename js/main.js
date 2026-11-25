@@ -145,13 +145,29 @@ lightbox.addEventListener('click', function (e) {
 const form = document.getElementById('quoteForm');
 const formError = document.getElementById('formError');
 
-// "Otra cantidad": muestra un campo para que el cliente escriba la suya
+// "Otra cantidad…": la lista se convierte en un campo para escribir la cantidad
 const cantidad = document.getElementById('qCantidad');
 const cantidadOtra = document.getElementById('qCantidadOtra');
+const cantidadOtraWrap = document.getElementById('qCantidadOtraWrap');
+const cantidadLabel = document.querySelector('label[for="qCantidad"]');
+
+function modoEscribir(on) {
+  cantidad.hidden = on;
+  cantidadOtraWrap.hidden = !on;
+  cantidadLabel.htmlFor = on ? 'qCantidadOtra' : 'qCantidad';
+  if (on) {
+    cantidadOtra.focus();
+  } else {
+    cantidad.value = '';
+    cantidadOtra.value = '';
+    cantidad.focus();
+  }
+}
 cantidad.addEventListener('change', function () {
-  const otra = cantidad.value === 'otra';
-  cantidadOtra.hidden = !otra;
-  if (otra) cantidadOtra.focus();
+  if (cantidad.value === 'otra') modoEscribir(true);
+});
+document.getElementById('qCantidadVolver').addEventListener('click', function () {
+  modoEscribir(false);
 });
 
 function cantidadElegida() {

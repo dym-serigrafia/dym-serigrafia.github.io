@@ -22,7 +22,7 @@
 
   <!-- Tipografía: Archivo variable (incluida en assets/fonts, ancho 62–125% y peso 100–900) -->
   <link rel="preload" href="assets/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=20261125b">
 </head>
 <body>
 
@@ -344,11 +344,14 @@
               <option>1,000 unidades</option>
               <option>2,000 unidades</option>
               <option>3,000 unidades</option>
-              <option value="otra">Otra cantidad (escríbela)</option>
+              <option value="otra">Otra cantidad…</option>
             </select>
-            <!-- Aparece solo al elegir "Otra cantidad" (ver js/main.js) -->
-            <input id="qCantidadOtra" name="cantidadOtra" type="text" inputmode="numeric" autocomplete="off"
-                   placeholder="Escribe la cantidad, por ejemplo 1500" aria-label="Escribe la cantidad de bolsas" hidden>
+            <!-- Al elegir "Otra cantidad…" la lista se convierte en este campo (ver js/main.js) -->
+            <div class="qty-other" id="qCantidadOtraWrap" hidden>
+              <input id="qCantidadOtra" name="cantidadOtra" type="text" inputmode="numeric" autocomplete="off"
+                     placeholder="Ej.: 1500">
+              <button type="button" class="qty-other__back" id="qCantidadVolver">Ver opciones</button>
+            </div>
           </div>
 
           <fieldset class="field field--radios">
@@ -430,6 +433,6 @@
     </defs>
   </svg>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=20261125b"></script>
 </body>
 </html>
