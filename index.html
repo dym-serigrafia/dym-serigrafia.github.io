@@ -340,13 +340,15 @@
           <div class="field">
             <label for="qCantidad">Cantidad aproximada</label>
             <select id="qCantidad" name="cantidad" required>
-              <option value="">Elige un rango</option>
-              <option>Menos de 1,000 unidades</option>
-              <option>Entre 1,000 y 5,000 unidades</option>
-              <option>Entre 5,000 y 10,000 unidades</option>
-              <option>Más de 10,000 unidades</option>
-              <option>Aún no lo sé</option>
+              <option value="">Elige una cantidad</option>
+              <option>1,000 unidades</option>
+              <option>2,000 unidades</option>
+              <option>3,000 unidades</option>
+              <option value="otra">Otra cantidad (escríbela)</option>
             </select>
+            <!-- Aparece solo al elegir "Otra cantidad" (ver js/main.js) -->
+            <input id="qCantidadOtra" name="cantidadOtra" type="text" inputmode="numeric" autocomplete="off"
+                   placeholder="Escribe la cantidad, por ejemplo 1500" aria-label="Escribe la cantidad de bolsas" hidden>
           </div>
 
           <fieldset class="field field--radios">

@@ -145,11 +145,28 @@ lightbox.addEventListener('click', function (e) {
 const form = document.getElementById('quoteForm');
 const formError = document.getElementById('formError');
 
+// "Otra cantidad": muestra un campo para que el cliente escriba la suya
+const cantidad = document.getElementById('qCantidad');
+const cantidadOtra = document.getElementById('qCantidadOtra');
+cantidad.addEventListener('change', function () {
+  const otra = cantidad.value === 'otra';
+  cantidadOtra.hidden = !otra;
+  if (otra) cantidadOtra.focus();
+});
+
+function cantidadElegida() {
+  if (cantidad.value !== 'otra') return cantidad.value;
+  const txt = cantidadOtra.value.trim();
+  // Si solo escribió números (ej. 1500), se agrega "unidades"
+  return /^[\d.,\s]+$/.test(txt) ? txt + ' unidades' : txt;
+}
+
 form.addEventListener('submit', function (e) {
   e.preventDefault();
 
-  // Campos obligatorios
+  // Campos obligatorios (la cantidad escrita solo si eligió "Otra cantidad")
   const required = ['qRubro', 'qTipo', 'qCantidad', 'qNegocio'];
+  if (cantidad.value === 'otra') required.splice(3, 0, 'qCantidadOtra');
   let ok = true;
   required.forEach(function (id) {
     const input = document.getElementById(id);
@@ -175,7 +192,7 @@ form.addEventListener('submit', function (e) {
     '• Negocio: ' + data.get('negocio').trim(),
     '• Rubro: ' + data.get('rubro'),
     '• Tipo de bolsa/producto: ' + data.get('tipo'),
-    '• Cantidad aproximada: ' + data.get('cantidad'),
+    '• Cantidad aproximada: ' + cantidadElegida(),
     '• Colores de impresión: ' + data.get('colores')
   ];
   if (comentario) lines.push('• Comentario: ' + comentario);
